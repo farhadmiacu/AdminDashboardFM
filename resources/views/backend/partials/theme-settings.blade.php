@@ -127,7 +127,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme01" name="data-theme" type="radio" value="default" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme01">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/default.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/default.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Default</h5>
@@ -136,7 +136,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme02" name="data-theme" type="radio" value="saas" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme02">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/saas.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/saas.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Sass</h5>
@@ -145,7 +145,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme03" name="data-theme" type="radio" value="corporate" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme03">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/corporate.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/corporate.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Corporate</h5>
@@ -154,7 +154,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme04" name="data-theme" type="radio" value="galaxy" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme04">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/galaxy.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/galaxy.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Galaxy</h5>
@@ -163,7 +163,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme05" name="data-theme" type="radio" value="material" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme05">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/material.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/material.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Material</h5>
@@ -172,7 +172,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme06" name="data-theme" type="radio" value="creative" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme06">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/creative.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/creative.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Creative</h5>
@@ -181,7 +181,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme07" name="data-theme" type="radio" value="minimal" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme07">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/minimal.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/minimal.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Minimal</h5>
@@ -190,7 +190,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme08" name="data-theme" type="radio" value="modern" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme08">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/modern.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/modern.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Modern</h5>
@@ -200,7 +200,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme09" name="data-theme" type="radio" value="interactive" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme09">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/interactive.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/interactive.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Interactive</h5>
@@ -210,7 +210,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme10" name="data-theme" type="radio" value="classic" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme10">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/classic.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/classic.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Classic</h5>
@@ -220,7 +220,7 @@
                          <div class="form-check card-radio">
                              <input id="customizer-theme11" name="data-theme" type="radio" value="vintage" class="form-check-input">
                              <label class="form-check-label p-0" for="customizer-theme11">
-                                 <img src="../../{{ asset('/') }}backend/assets/images/demo/vintage.png" alt="" class="img-fluid">
+                                 <img src="{{ asset('/') }}backend/assets/images/demo/vintage.png" alt="" class="img-fluid">
                              </label>
                          </div>
                          <h5 class="fs-13 text-center fw-medium mt-2">Vintage</h5>
