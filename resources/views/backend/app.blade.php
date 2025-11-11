@@ -55,8 +55,8 @@
     </button>
     <!--end back-to-top-->
 
-    @include('backend.partials.preloader') <!-- preloader, customizer setting -->
-    @include('backend.partials.theme-settings')
+    {{-- @include('backend.partials.preloader')  --}}
+    {{-- @include('backend.partials.theme-settings') --}}
     @include('backend.partials.scripts')
     @stack('scripts')
 
