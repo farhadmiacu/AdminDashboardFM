@@ -18,3 +18,6 @@
   <link href="{{ asset('/') }}backend/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
 
   <!-- Template css end -->
+
+  <!-- Dropify CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" rel="stylesheet">

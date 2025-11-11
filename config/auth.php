@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'jwt',      // JWT driver
+            'provider' => 'users',  // same model as backend
+        ],
     ],
 
     /*

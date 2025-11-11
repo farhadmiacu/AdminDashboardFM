@@ -1,3 +1,6 @@
+  <!-- Jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
   <!-- Template js start -->
 
   <!-- JAVASCRIPT -->
@@ -27,3 +30,6 @@
   <script src="{{ asset('/') }}backend/assets/js/app.js"></script>
 
   <!-- Template js end -->
+
+  <!-- Dropify -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>

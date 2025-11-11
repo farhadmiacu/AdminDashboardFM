@@ -3,21 +3,29 @@
      <!-- LOGO -->
      <div class="navbar-brand-box">
          <!-- Dark Logo-->
-         <a href="index.html" class="logo logo-dark">
+         <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
              <span class="logo-sm">
-                 <img src="{{ asset('/') }}backend/assets/images/logo-sm.png" alt="" height="22">
+                 @if (!empty($systemSetting->mini_logo))
+                     <img src="{{ asset($systemSetting->mini_logo) }}" alt="Logo" height="22">
+                 @endif
              </span>
              <span class="logo-lg">
-                 <img src="{{ asset('/') }}backend/assets/images/logo-dark.png" alt="" height="17">
+                 @if (!empty($systemSetting->logo))
+                     <img src="{{ asset($systemSetting->logo) }}" alt="Logo" height="35">
+                 @endif
              </span>
          </a>
          <!-- Light Logo-->
-         <a href="index.html" class="logo logo-light">
+         <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
              <span class="logo-sm">
-                 <img src="{{ asset('/') }}backend/assets/images/logo-sm.png" alt="" height="22">
+                 @if (!empty($systemSetting->mini_logo))
+                     <img src="{{ asset($systemSetting->mini_logo) }}" alt="Logo" height="22">
+                 @endif
              </span>
              <span class="logo-lg">
-                 <img src="{{ asset('/') }}backend/assets/images/logo-light.png" alt="" height="17">
+                 @if (!empty($systemSetting->logo))
+                     <img src="{{ asset($systemSetting->logo) }}" alt="Logo" height="35">
+                 @endif
              </span>
          </a>
          <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
@@ -29,18 +37,26 @@
      <div class="dropdown sidebar-user m-1 rounded">
          <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              <span class="d-flex align-items-center gap-2">
-                 <img class="rounded header-profile-user" src="{{ asset('/') }}backend/assets/images/users/avatar-1.jpg" alt="Header Avatar">
+                 <img class="rounded header-profile-user" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('backend/assets/images/users/avatar-1.jpg') }}" alt="Header Avatar">
                  <span class="text-start">
-                     <span class="d-block fw-medium sidebar-user-name-text">Anna Adame</span>
+                     <span class="d-block fw-medium sidebar-user-name-text">{{ auth()->user()->name }}</span>
                      <span class="d-block fs-14 sidebar-user-name-sub-text"><i class="ri ri-circle-fill fs-10 text-success align-baseline"></i> <span class="align-middle">Online</span></span>
                  </span>
              </span>
          </button>
          <div class="dropdown-menu dropdown-menu-end">
              <!-- item-->
-             <h6 class="dropdown-header">Welcome Anna!</h6>
-             <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
-             <a class="dropdown-item" href="auth-logout-basic.html"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+             <h6 class="dropdown-header">Welcome {{ auth()->user()->name }}!</h6>
+             <a class="dropdown-item" href="{{ route('admin.profile-settings.edit') }}"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
+                     class="align-middle">Profile</span></a>
+             <!-- Logout -->
+             <form method="POST" action="{{ route('logout') }}">
+                 @csrf
+                 <button type="submit" class="dropdown-item">
+                     <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                     <span class="align-middle" data-key="t-logout">Logout</span>
+                 </button>
+             </form>
          </div>
      </div>
 
@@ -51,14 +67,18 @@
              <div id="two-column-menu">
              </div>
              <ul class="navbar-nav" id="navbar-nav">
-                 <!-- Dashboard Menu -->
+
+                 <!--  Menu -->
                  <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+
+                 <!-- Dashboard -->
                  <li class="nav-item">
-                     <a class="nav-link menu-link" href="#sidebarDashboards">
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                          <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                      </a>
                  </li>
-                 <!-- end Dashboard Menu -->
+
+                 <!-- Apps -->
                  <li class="nav-item">
                      <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
                          <i class="ri-apps-2-line"></i> <span data-key="t-apps">Apps</span>
@@ -99,6 +119,60 @@
                                          </li>
                                      </ul>
                                  </div>
+                             </li>
+                         </ul>
+                     </div>
+                 </li>
+
+                 {{-- Settings --}}
+                 <li class="menu-title"><span data-key="t-menu">Settings</span></li>
+
+                 {{-- Settings Section --}}
+                 <li class="nav-item">
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') ? '' : 'collapsed' }}"
+                         href="#sidebarSettings" data-bs-toggle="collapse" role="button"
+                         aria-expanded="{{ request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') ? 'true' : 'false' }}"
+                         aria-controls="sidebarSettings">
+                         <i class="ri-settings-3-line"></i> <span>Settings</span>
+                     </a>
+
+                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') || request()->routeIs('admin.social-settings.*') ? 'show' : '' }}"
+                         id="sidebarSettings">
+
+                         <ul class="nav nav-sm flex-column">
+                             {{-- Profile Settings --}}
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.profile-settings.edit') }}" class="nav-link {{ request()->routeIs('admin.profile-settings.*') ? 'active' : '' }}">
+                                     <i class="ri-user-settings-line"></i> <span>Profile Settings</span>
+                                 </a>
+                             </li>
+
+                             {{-- Social Settings --}}
+                             {{-- <li class="nav-item">
+                                 <a href="{{ route('admin.social-settings.edit') }}" class="nav-link {{ request()->routeIs('admin.social-settings.*') ? 'active' : '' }}">
+                                     <i class="ri-share-line"></i> <span>Social Settings</span>
+                                 </a>
+                             </li> --}}
+
+                             {{-- Stripe Settings --}}
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.stripe-settings.edit') }}" class="nav-link {{ request()->routeIs('admin.stripe-settings.*') ? 'active' : '' }}">
+                                     <i class="ri-mail-settings-line"></i> <span>Stripe Settings</span>
+                                 </a>
+                             </li>
+
+                             {{-- System Settings --}}
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.system-settings.edit') }}" class="nav-link {{ request()->routeIs('admin.system-settings.*') ? 'active' : '' }}">
+                                     <i class="ri-settings-3-line"></i> <span>System Settings</span>
+                                 </a>
+                             </li>
+
+                             {{-- Mail Settings --}}
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.mail-settings.edit') }}" class="nav-link {{ request()->routeIs('admin.mail-settings.*') ? 'active' : '' }}">
+                                     <i class="ri-mail-settings-line"></i> <span>Mail Settings</span>
+                                 </a>
                              </li>
                          </ul>
                      </div>

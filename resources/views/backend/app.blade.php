@@ -4,12 +4,13 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Dashboard | Velzon - Admin & Dashboard Template</title>
+    <title>{{ $systemSetting->system_title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('/') }}backend/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset($systemSetting->favicon) }}">
 
     @include('backend.partials.styles')
     @stack('styles')
@@ -56,7 +57,7 @@
     <!--end back-to-top-->
 
     {{-- @include('backend.partials.preloader')  --}}
-    {{-- @include('backend.partials.theme-settings') --}}
+    @include('backend.partials.theme-settings')
     @include('backend.partials.scripts')
     @stack('scripts')
 
