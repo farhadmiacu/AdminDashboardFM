@@ -37,7 +37,7 @@
 
             <div class="d-flex align-items-center">
 
-                <div class="dropdown d-md-none topbar-head-dropdown header-item">
+                {{-- <div class="dropdown d-md-none topbar-head-dropdown header-item">
                     <button type="button" class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle" id="page-header-search-dropdown" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <i class="bx bx-search fs-22"></i>
@@ -52,7 +52,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="ms-1 header-item d-none d-sm-flex">
                     <button type="button" class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle" data-toggle="fullscreen">
