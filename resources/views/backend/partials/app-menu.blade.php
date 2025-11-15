@@ -95,9 +95,10 @@
                      </div>
                  </li>
 
-                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
+                 {{-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li> --}}
 
-                 <li class="nav-item">
+                 {{-- nested drop down menu  --}}
+                 {{-- <li class="nav-item">
                      <a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAuth">
                          <i class="ri-account-circle-line"></i> <span data-key="t-authentication">Authentication</span>
                      </a>
@@ -122,7 +123,7 @@
                              </li>
                          </ul>
                      </div>
-                 </li>
+                 </li> --}}
 
                  {{-- Settings --}}
                  <li class="menu-title"><span data-key="t-menu">Settings</span></li>
