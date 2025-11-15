@@ -113,7 +113,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <button type="submit" class="btn btn-primary me-2">Update Settings</button>
                     </form>
                 </div>
             </div>

@@ -103,7 +103,14 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            let drEvent = $('.dropify').dropify();
+            let drEvent = $('.dropify').dropify({
+                messages: {
+                    'default': 'Drag or click',
+                    'replace': 'Drag to replace',
+                    'remove': 'Remove',
+                    'error': 'Something went wrong.'
+                }
+            });
 
             drEvent.on('dropify.afterClear', function() {
                 $('#remove_avatar').val(1);

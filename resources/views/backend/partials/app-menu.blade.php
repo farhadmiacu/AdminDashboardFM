@@ -148,11 +148,11 @@
                              </li>
 
                              {{-- Social Settings --}}
-                             {{-- <li class="nav-item">
+                             <li class="nav-item">
                                  <a href="{{ route('admin.social-settings.edit') }}" class="nav-link {{ request()->routeIs('admin.social-settings.*') ? 'active' : '' }}">
                                      <i class="ri-share-line"></i> <span>Social Settings</span>
                                  </a>
-                             </li> --}}
+                             </li>
 
                              {{-- Stripe Settings --}}
                              <li class="nav-item">

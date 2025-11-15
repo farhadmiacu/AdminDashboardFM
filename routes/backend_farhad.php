@@ -32,5 +32,4 @@ Route::middleware(['auth:web'])->prefix('admin')->name('admin.')->group(function
     // Systems routes
     Route::get('system/settings', [SystemSettingController::class, 'edit'])->name('system-settings.edit');
     Route::post('system/settings', [SystemSettingController::class, 'update'])->name('system-settings.update');
-
-    });
+});

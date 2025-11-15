@@ -22,7 +22,7 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Update Settings</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Update System Settings</h4>
                 </div><!-- end card header -->
 
                 <form action="{{ route('admin.system-settings.update') }}" method="POST" enctype="multipart/form-data">
@@ -152,7 +152,7 @@
                             </div>
 
                             {{-- Submit Button --}}
-                            <div class="col-xxl-12 col-md-12 text-end">
+                            <div class="col-xxl-12 col-md-12">
                                 <button type="submit" class="btn btn-primary">Update Settings</button>
                             </div>
 
@@ -175,9 +175,9 @@
             $('.dropify').dropify({
                 messages: {
                     'default': 'Drag or click',
-                    'replace': 'Drag and drop or click to replace',
-                    'remove': 'Remove file',
-                    'error': 'Ooops! something went wrong.'
+                    'replace': 'Drag to replace',
+                    'remove': 'Remove',
+                    'error': 'Something went wrong.'
                 }
             });
 
