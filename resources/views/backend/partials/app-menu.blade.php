@@ -78,18 +78,45 @@
                      </a>
                  </li>
 
-                 <!-- Apps -->
+                 {{-- Category Menu --}}
                  <li class="nav-item">
-                     <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
-                         <i class="ri-apps-2-line"></i> <span data-key="t-apps">Apps</span>
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.categories.*') ? '' : 'collapsed' }}" href="#sidebarCategory" data-bs-toggle="collapse" role="button"
+                         aria-expanded="{{ request()->routeIs('admin.categories.*') ? 'true' : 'false' }}" aria-controls="sidebarCategory">
+                         <i class="ri-folder-line"></i> <span>Category</span>
                      </a>
-                     <div class="collapse menu-dropdown" id="sidebarApps">
+                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.categories.*') ? 'show' : '' }}" id="sidebarCategory">
                          <ul class="nav nav-sm flex-column">
                              <li class="nav-item">
-                                 <a href="apps-file-manager.html" class="nav-link"> <span data-key="t-file-manager">File Manager</span></a>
+                                 <a href="{{ route('admin.categories.create') }}" class="nav-link {{ request()->routeIs('admin.categories.create') ? 'active' : '' }}">
+                                     Add Category
+                                 </a>
                              </li>
                              <li class="nav-item">
-                                 <a href="apps-todo.html" class="nav-link"> <span data-key="t-to-do">To Do</span></a>
+                                 <a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
+                                     All Categories
+                                 </a>
+                             </li>
+                         </ul>
+                     </div>
+                 </li>
+
+                 {{-- Product Menu --}}
+                 <li class="nav-item">
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.products.*') ? '' : 'collapsed' }}" href="#sidebarProduct" data-bs-toggle="collapse" role="button"
+                         aria-expanded="{{ request()->routeIs('admin.products.*') ? 'true' : 'false' }}" aria-controls="sidebarProduct">
+                         <i class="ri-shopping-bag-3-line"></i> <span>Product</span>
+                     </a>
+                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.products.*') ? 'show' : '' }}" id="sidebarProduct">
+                         <ul class="nav nav-sm flex-column">
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.products.create') }}" class="nav-link {{ request()->routeIs('admin.products.create') ? 'active' : '' }}">
+                                     Add Product
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.products.index') }}" class="nav-link {{ request()->routeIs('admin.products.index') ? 'active' : '' }}">
+                                     All Products
+                                 </a>
                              </li>
                          </ul>
                      </div>
