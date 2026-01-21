@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Farhad\StatusController;
 use App\Http\Controllers\Backend\Farhad\ProductController;
 use App\Http\Controllers\Backend\Farhad\CategoryController;
+use App\Http\Controllers\Backend\Setting\ManagerController;
 use App\Http\Controllers\Backend\Farhad\DashboardController;
 use App\Http\Controllers\Backend\Setting\MailSettingController;
 use App\Http\Controllers\Backend\Setting\SocialSettingController;
@@ -35,26 +36,31 @@ Route::middleware(['auth:web'])->prefix('admin')->name('admin.')->group(function
     Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
     // Profile settings routes
-    Route::get('profile/settings', [ProfileSettingController::class, 'edit'])->name('profile-settings.edit');
-    Route::post('profile/settings/{id}', [ProfileSettingController::class, 'update'])->name('profile-settings.update');
-    Route::post('profile/change-password', [ProfileSettingController::class, 'changePassword'])->name('profile-settings.change-password');
+    Route::get('settings/profile', [ProfileSettingController::class, 'edit'])->name('profile-settings.edit');
+    Route::post('settings/profile/{id}', [ProfileSettingController::class, 'update'])->name('profile-settings.update');
+    Route::post('settings/profile/change-password', [ProfileSettingController::class, 'changePassword'])->name('profile-settings.change-password');
 
+    // Manager management routes
+    Route::get('settings/managers', [ManagerController::class, 'index'])->name('managers.index');
+    Route::post('settings/managers', [ManagerController::class, 'store'])->name('managers.store');
+    Route::put('settings/managers/{id}', [ManagerController::class, 'update'])->name('managers.update');
+    Route::delete('settings/managers/{id}', [ManagerController::class, 'destroy'])->name('managers.destroy');
 
     // Social settings routes
-    Route::get('social/settings', [SocialSettingController::class, 'edit'])->name('social-settings.edit');
-    Route::post('social/settings', [SocialSettingController::class, 'update'])->name('social-settings.update');
+    Route::get('settings/social', [SocialSettingController::class, 'edit'])->name('social-settings.edit');
+    Route::post('settings/social', [SocialSettingController::class, 'update'])->name('social-settings.update');
 
     // Mail settings routes
-    Route::get('mail/settings', [MailSettingController::class, 'edit'])->name('mail-settings.edit');
-    Route::post('mail/settings', [MailSettingController::class, 'update'])->name('mail-settings.update');
+    Route::get('settings/mail', [MailSettingController::class, 'edit'])->name('mail-settings.edit');
+    Route::post('settings/mail', [MailSettingController::class, 'update'])->name('mail-settings.update');
 
     // Stripe Settings routes
-    Route::get('stripe/settings', [StripeSettingController::class, 'edit'])->name('stripe-settings.edit');
-    Route::post('stripe/settings', [StripeSettingController::class, 'update'])->name('stripe-settings.update');
+    Route::get('settings/stripe', [StripeSettingController::class, 'edit'])->name('stripe-settings.edit');
+    Route::post('settings/stripe', [StripeSettingController::class, 'update'])->name('stripe-settings.update');
 
     // Systems routes
-    Route::get('system/settings', [SystemSettingController::class, 'edit'])->name('system-settings.edit');
-    Route::post('system/settings', [SystemSettingController::class, 'update'])->name('system-settings.update');
+    Route::get('settings/system', [SystemSettingController::class, 'edit'])->name('system-settings.edit');
+    Route::post('settings/system', [SystemSettingController::class, 'update'])->name('system-settings.update');
 
     //Status
     Route::post('/update-status', [StatusController::class, 'update'])->name('status.update');

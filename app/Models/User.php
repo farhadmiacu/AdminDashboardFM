@@ -20,9 +20,47 @@ class User extends Authenticatable implements JWTSubject
      * @var list<string>
      */
     protected $fillable = [
+        // Basic info
         'name',
+        'username',
         'email',
+        'phone',
+        'avatar',
+
+        // Auth & role
         'password',
+        'role',
+        'language',
+        'status',
+
+        // Location
+        'user_latitude',
+        'user_longitude',
+
+        // Address
+        'address',
+        'city',
+        'zip',
+
+        // OTP
+        'otp',
+        'otp_verified',
+        'otp_attempts',
+        'otp_expired_at',
+        'otp_verified_at',
+
+        // Social login
+        'google_id',
+        'facebook_id',
+        'provider',
+        'provider_token',
+
+        // Device & notification
+        'device_id',
+        'fcm_token',
+
+        // Activity
+        'last_login_at',
     ];
 
     /**

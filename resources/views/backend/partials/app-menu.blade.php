@@ -157,14 +157,14 @@
 
                  {{-- Settings Section --}}
                  <li class="nav-item">
-                     <a class="nav-link menu-link {{ request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') ? '' : 'collapsed' }}"
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.managers.*') ? '' : 'collapsed' }}"
                          href="#sidebarSettings" data-bs-toggle="collapse" role="button"
-                         aria-expanded="{{ request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') ? 'true' : 'false' }}"
+                         aria-expanded="{{ request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.managers.*') ? 'true' : 'false' }}"
                          aria-controls="sidebarSettings">
                          <i class="ri-settings-3-line"></i> <span>Settings</span>
                      </a>
 
-                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') || request()->routeIs('admin.social-settings.*') ? 'show' : '' }}"
+                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.managers.*') ? 'show' : '' }}"
                          id="sidebarSettings">
 
                          <ul class="nav nav-sm flex-column">
@@ -174,6 +174,15 @@
                                      <i class="ri-user-settings-line"></i> <span>Profile Settings</span>
                                  </a>
                              </li>
+
+                             {{-- Manage Managers --}}
+                             @if (auth()->user()->role == 'admin')
+                                 <li class="nav-item">
+                                     <a href="{{ route('admin.managers.index') }}" class="nav-link {{ request()->routeIs('admin.managers.*') ? 'active' : '' }}">
+                                         <i class="ri-group-line"></i> <span>Manage Managers</span>
+                                     </a>
+                                 </li>
+                             @endif
 
                              {{-- Social Settings --}}
                              <li class="nav-item">
