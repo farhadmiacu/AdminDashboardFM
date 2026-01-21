@@ -122,6 +122,3 @@
     </div>
     <!--end row-->
 @endsection
-
-@push('scripts')
-@endpush

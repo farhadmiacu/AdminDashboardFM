@@ -19,22 +19,29 @@ class AdminUserSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'username' => 'admin',
-                'email' => 'admin@admin.com',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('12345678'),
-                'role' => 1,
+                'role' => 'admin',
             ],
             [
-                'name' => 'User',
-                'username' => 'user',
-                'email' => 'user@user.com',
+                'name' => 'User1',
+                'username' => 'user1',
+                'email' => 'user1@gmail.com',
                 'password' => Hash::make('12345678'),
             ],
             [
-                'name' => 'sajib',
-                'username' => 'sajib',
-                'email' => 'sajib@gmail.com',
+                'name' => 'User2',
+                'username' => 'user2',
+                'email' => 'user2@gmail.com',
                 'password' => Hash::make('12345678'),
-            ]
+            ],
+            [
+                'name' => 'User3',
+                'username' => 'user3',
+                'email' => 'user3@gmail.com',
+                'password' => Hash::make('12345678'),
+            ],
+
         ];
 
         foreach ($users as $user) {

@@ -190,18 +190,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('.dropify').dropify({
-                messages: {
-                    'default': 'Drag or click',
-                    'replace': 'Drag to replace',
-                    'remove': 'Remove',
-                    'error': 'Something went wrong.'
-                }
-            });
-        });
-    </script>
-@endpush

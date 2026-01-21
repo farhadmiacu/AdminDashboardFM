@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Notifications\OtpNotification;
 use Illuminate\Support\Facades\Hash;
 
-trait apiresponse
+trait ApiResponse
 {
     public function success($data, $message = null, $code = 200)
     {

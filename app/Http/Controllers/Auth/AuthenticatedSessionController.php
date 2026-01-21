@@ -27,7 +27,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         // ---- Restrict login to admin only ----
-        if (Auth::user()->role != 1) {
+        if (Auth::user()->role != 'admin') {
             Auth::logout();
             return back()->withErrors([
                 'email' => 'You are not authorized to access the admin panel.',

@@ -139,8 +139,33 @@
                                 </div>
                             </div>
 
-                            {{-- Copyright Text --}}
+                            {{-- Company Address --}}
                             <div class="col-xxl-12 col-md-12">
+                                <div>
+                                    <label for="company_address" class="form-label">Company Address</label>
+                                    <textarea name="company_address" id="company_address" class="form-control" placeholder="Enter company address"
+                                        rows="3">{{ old('company_address', $setting->company_address ?? '') }}</textarea>
+                                    @error('company_address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                             {{-- Tax Percentage --}}
+                            <div class="col-xxl-6 col-md-6">
+                                <div>
+                                    <label for="tax_percentage" class="form-label">Tax Percentage (%)</label>
+                                    <input type="number" name="tax_percentage" id="tax_percentage" class="form-control"
+                                        placeholder="e.g., 10.50" step="0.01" min="0" max="100"
+                                        value="{{ old('tax_percentage', $setting->tax_percentage ?? '') }}">
+                                    @error('tax_percentage')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- Copyright Text --}}
+                            <div class="col-xxl-6 col-md-6">
                                 <div>
                                     <label for="copyright_text" class="form-label">Copyright Text</label>
                                     <input type="text" name="copyright_text" id="copyright_text" class="form-control" placeholder="Enter copyright text"

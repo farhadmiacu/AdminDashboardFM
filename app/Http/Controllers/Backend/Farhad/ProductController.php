@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Farhad;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Helpers\MiaHelper;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ProductMultiImage;
@@ -96,31 +97,15 @@ class ProductController extends Controller
             'status' => 'required|in:0,1',
         ]);
 
-        // Handle image upload
-        $imageUrl = null;
+        $product = new Product();
 
-        if ($request->file('image')) {
-            $image     = $request->file('image');
-            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-            $directory = 'uploads/products-images/';
-            // Create directory if it doesn't exist
-            if (!file_exists(public_path($directory))) {
-                mkdir(public_path($directory), 0755, true);
-            }
-            // $resizedImage = Image::make($image)->resize(300, 300);
-            $resizedImage = Image::make($image);
-            $resizedImage->save(public_path($directory . $imageName));
-            $imageUrl = $directory . $imageName;
+        if ($request->hasFile('image')) {
+            $product->image = MiaHelper::uploadFile($request->file('image'), 'product-images');
         }
 
-
-
-        $product = new Product();
         $product->name = $request->name;
-        $product->user_id     = auth()->id();
         $product->category_id = $request->category_id;
         $product->code = $request->code;
-        $product->image = $imageUrl;
         $product->short_description = $request->short_description;
         $product->highlight_title = $request->highlight_title;
         $product->long_description = $request->long_description;
@@ -187,29 +172,14 @@ class ProductController extends Controller
             'status' => 'required|in:0,1',
         ]);
 
-        // Image update or keep old or remove
-        $imageUrl = $product->image; // default: keep old image
-        if ($request->file('image')) {
-            if ($product->image && file_exists($product->image)) {
-                unlink($product->image);
-            }
-
-            // Upload new image
-            $image     = $request->file('image');
-            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-            $directory = 'uploads/products-images/';
-
-            // $resizedImage = Image::make($image)->resize(300, 300);
-            $resizedImage = Image::make($image);
-            $resizedImage->save(public_path($directory . $imageName));
-            $imageUrl = $directory . $imageName;
+        // Image update
+        if ($request->hasFile('image')) {
+            $product->image = MiaHelper::updateFile($product->image, $request->file('image'), 'product-images');
         }
 
-        $product->user_id     = auth()->id();
         $product->name = $request->name;
         $product->category_id = $request->category_id;
         $product->code = $request->code;
-        $product->image = $imageUrl;
         $product->short_description = $request->short_description;
         $product->highlight_title = $request->highlight_title;
         $product->long_description = $request->long_description;

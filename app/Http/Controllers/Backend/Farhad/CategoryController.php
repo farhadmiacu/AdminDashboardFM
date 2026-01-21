@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Farhad;
 
 use App\Models\Category;
+use App\Helpers\MiaHelper;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -65,26 +66,15 @@ class CategoryController extends Controller
             'status' => 'required|in:0,1',
         ]);
 
-        $imageUrl = null;
-
-        if ($request->file('image')) {
-            $image     = $request->file('image');
-            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-            $directory = 'uploads/categories-images/';
-
-            if (!file_exists(public_path($directory))) {
-                mkdir(public_path($directory), 0755, true);
-            }
-
-            $image->move($directory, $imageName);
-            $imageUrl = $directory . $imageName;
-        }
 
         $category = new Category();
-        $category->user_id     = auth()->id();
+
+        if ($request->hasFile('image')) {
+            $category->image = MiaHelper::uploadFile($request->file('image'), 'category-images');
+        }
+
         $category->name        = $request->name;
         $category->slug        = Str::slug($request->name);
-        $category->image       = $imageUrl;
         $category->description = $request->description;
         $category->status      = $request->status;
         $category->save();
@@ -109,25 +99,12 @@ class CategoryController extends Controller
             'status' => 'required|in:0,1',
         ]);
 
-        $imageUrl = $category->image;
-
-        if ($request->file('image')) {
-            if ($category->image && file_exists(public_path($category->image))) {
-                unlink(public_path($category->image));
-            }
-
-            $image     = $request->file('image');
-            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-            $directory = 'uploads/categories-images/';
-
-            $image->move(public_path($directory), $imageName);
-            $imageUrl = $directory . $imageName;
+        if ($request->hasFile('image')) {
+            $category->image = MiaHelper::updateFile($category->image, $request->file('image'), 'category-images');
         }
 
-        $category->user_id     = auth()->id();
         $category->name        = $request->name;
         $category->slug        = Str::slug($request->name);
-        $category->image       = $imageUrl;
         $category->description = $request->description;
         $category->status      = $request->status;
         $category->save();

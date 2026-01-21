@@ -25,6 +25,7 @@ class SystemSettingSeeder extends Seeder
                 'phone_number'    => '+39 366 2270888',
                 'whatsapp_number' => '+39 366 2270888',
                 'email'           => 'info@email.net',
+                'company_address' => '1234 Street Name, City, Country',
                 'copyright_text'  => '© ' . date('Y') . ' Admin Panel . All rights reserved.',
             ]
         );

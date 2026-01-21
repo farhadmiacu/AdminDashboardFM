@@ -31,7 +31,6 @@ class ProfileSettingController extends Controller
             'username' => 'required|string|max:255|unique:users,username,' . $user->id,
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:5048',
-            'password' => 'nullable|string|min:6|confirmed',
         ]);
 
         // Update basic info
@@ -76,17 +75,31 @@ class ProfileSettingController extends Controller
 
         $user->avatar = $avatarUrl;
 
-        // -------------------------
-        // Password update (if entered)
-        // -------------------------
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-        }
-
         $user->save();
 
         return redirect()
             ->route('admin.profile-settings.edit')
-            ->with('success', 'Profile updated successfully!');
+            ->with(['success' => 'Profile updated successfully!', 'active_tab' => 'profile']);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password does not match.'])->withInput()->with('active_tab', 'password');
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()
+            ->route('admin.profile-settings.edit')
+            ->with(['success' => 'Password changed successfully!', 'active_tab' => 'password']);
     }
 }

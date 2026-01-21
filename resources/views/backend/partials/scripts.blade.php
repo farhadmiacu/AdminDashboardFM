@@ -32,7 +32,8 @@
   <!-- Template js end -->
 
   <!-- Yajra DataTable -->
-  <script src="https://cdn.datatables.net/v/bs5/dt-2.3.4/r-3.0.3/datatables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.3.6/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/3.0.7/js/dataTables.responsive.min.js"></script>
 
   <!-- sweetalert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -179,3 +180,31 @@
       });
   </script>
   {{-- status update end  --}}
+
+  {{-- SweetAlert2 Delete Confirmation start --}}
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // Delegate the event so it works with dynamically added buttons
+          $(document).on('click', '.delete-button', function(e) {
+              e.preventDefault(); // stop normal form submit
+              const form = $(this).closest('form'); // grab parent form
+
+              Swal.fire({
+                  title: 'Are you sure?',
+                  text: "You won't be able to revert this!",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, delete it!',
+                  cancelButtonText: 'Cancel',
+                  reverseButtons: true
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      form.submit(); // submit form if confirmed
+                  }
+              });
+          });
+      });
+  </script>
+  {{-- SweetAlert2 Delete Confirmation end --}}

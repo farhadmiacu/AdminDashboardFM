@@ -25,10 +25,12 @@ class SystemSettingController extends Controller
             'phone_number' => 'nullable|string|max:20',
             'whatsapp_number' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
+            'company_address' => 'nullable|string',
             'copyright_text' => 'nullable|string|max:255',
+            'tax_percentage' => 'nullable|numeric|min:0|max:100',
             'logo' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:5120',
             'mini_logo' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:5120',
-            'favicon' => 'nullable|image|mimes:png,ico|max:5120',
+            'favicon' => 'nullable|image|mimes:png,jpg,jpeg,svg,ico|max:5120',
         ]);
 
         $setting = SystemSetting::first();
@@ -101,7 +103,9 @@ class SystemSettingController extends Controller
         $setting->phone_number = $request->phone_number;
         $setting->whatsapp_number = $request->whatsapp_number;
         $setting->email = $request->email;
+        $setting->company_address = $request->company_address;
         $setting->copyright_text = $request->copyright_text;
+        $setting->tax_percentage = $request->tax_percentage;
 
         $setting->save();
 

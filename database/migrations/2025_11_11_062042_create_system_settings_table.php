@@ -22,7 +22,9 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('whatsapp_number')->nullable();
             $table->string('email')->nullable();
+            $table->text('company_address')->nullable();
             $table->string('copyright_text')->nullable();
+            $table->decimal('tax_percentage', 5, 2)->default(0.00)->nullable();
             $table->timestamps();
         });
     }

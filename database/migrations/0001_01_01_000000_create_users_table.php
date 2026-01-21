@@ -19,18 +19,36 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('password_reset_token')->nullable(); //optional
+            $table->timestamp('password_reset_token_expired_at')->nullable(); //optional
             $table->string('avatar')->nullable();
-            // optional fields start ---
-            // $table->string('otp', 10)->nullable();
-            // $table->timestamp('otp_expired_at')->nullable();
-            // $table->timestamp('otp_verified_at')->nullable();
-            // $table->string('password_reset_token')->nullable();
-            // $table->timestamp('password_reset_token_expires_at')->nullable();
-            // optional fields end ---
-            $table->tinyInteger('role')->default(0)->comment('1 = Admin, 0 = User');
-            $table->tinyInteger('status')->default(1)->comment('1 = Active, 0 = Inactive');
+            $table->string('role')->default('user')->comment('Possible values: admin, user, editor, manager, moderator');
+            $table->decimal('user_latitude', 10, 7)->nullable(); //optional
+            $table->decimal('user_longitude', 10, 7)->nullable(); //optional
+            // address fields start ---
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
+            // otp fields start ---
+            $table->string('otp', 6)->nullable();
+            $table->boolean('otp_verified')->default(false);
+            $table->unsignedInteger('otp_attempts')->default(0); //optional
+            $table->timestamp('otp_expired_at')->nullable();
+            $table->timestamp('otp_verified_at')->nullable(); //optional
+            // social fields and fcm start ---
+            $table->string('google_id')->nullable();
+            $table->string('facebook_id')->nullable();
+            $table->string('provider')->nullable(); //optional
+            $table->text('provider_token')->nullable(); //optional
+            $table->string('device_id')->nullable();
+            $table->string('fcm_token')->nullable();
+            // social fields and fcm end ---
+            $table->timestamp('last_login_at')->nullable();
             $table->rememberToken();
+            $table->string('language')->default('en');
+            $table->tinyInteger('status')->default(1)->comment('1 = Active, 0 = Inactive');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -37,6 +37,8 @@ Route::middleware(['auth:web'])->prefix('admin')->name('admin.')->group(function
     // Profile settings routes
     Route::get('profile/settings', [ProfileSettingController::class, 'edit'])->name('profile-settings.edit');
     Route::post('profile/settings/{id}', [ProfileSettingController::class, 'update'])->name('profile-settings.update');
+    Route::post('profile/change-password', [ProfileSettingController::class, 'changePassword'])->name('profile-settings.change-password');
+
 
     // Social settings routes
     Route::get('social/settings', [SocialSettingController::class, 'edit'])->name('social-settings.edit');

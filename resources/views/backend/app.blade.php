@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="{{ asset($systemSetting->favicon) }}">
 
     @include('backend.partials.styles')
-    @stack('styles')
+    @stack('styles') <!-- additional styles for @ push('styles')-->
 
 </head>
 
@@ -59,7 +59,7 @@
     {{-- @include('backend.partials.preloader')  --}}
     @include('backend.partials.theme-settings')
     @include('backend.partials.scripts')
-    @stack('scripts')
+    @stack('scripts') <!-- additional scripts for @ push('scripts')-->
 
 </body>
 
