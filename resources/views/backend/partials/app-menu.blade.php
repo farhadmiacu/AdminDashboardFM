@@ -157,14 +157,14 @@
 
                  {{-- Settings Section --}}
                  <li class="nav-item">
-                     <a class="nav-link menu-link {{ request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.managers.*') ? '' : 'collapsed' }}"
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.managers.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') ? '' : 'collapsed' }}"
                          href="#sidebarSettings" data-bs-toggle="collapse" role="button"
-                         aria-expanded="{{ request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.managers.*') ? 'true' : 'false' }}"
+                         aria-expanded="{{ request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.managers.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') ? 'true' : 'false' }}"
                          aria-controls="sidebarSettings">
                          <i class="ri-settings-3-line"></i> <span>Settings</span>
                      </a>
 
-                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') || request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.payment-settings.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.managers.*') ? 'show' : '' }}"
+                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.managers.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') ? 'show' : '' }}"
                          id="sidebarSettings">
 
                          <ul class="nav nav-sm flex-column">
