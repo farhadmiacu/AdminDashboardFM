@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 trait ApiResponse
 {
-    public function success($data, $message = null, $code = 200)
+    public function successResponse($data, $message = null, $code = 200)
     {
         return response()->json([
             'success' => true,
@@ -18,7 +18,7 @@ trait ApiResponse
         ], $code);
     }
 
-    public function error($data, $message = null, $code = 500)
+    public function errorResponse($data, $message = null, $code = 500)
     {
         return response()->json([
             'status' => false,

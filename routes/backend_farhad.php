@@ -12,7 +12,7 @@ use App\Http\Controllers\Backend\Setting\StripeSettingController;
 use App\Http\Controllers\Backend\Setting\SystemSettingController;
 use App\Http\Controllers\Backend\Setting\ProfileSettingController;
 
-Route::middleware(['auth:web'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth:web', 'role:admin,manager'])->prefix('admin')->name('admin.')->group(function () {
 
     // Dashboard route
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

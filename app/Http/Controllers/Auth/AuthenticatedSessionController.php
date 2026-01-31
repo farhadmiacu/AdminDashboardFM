@@ -26,19 +26,23 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        // ---- Restrict login to admin only ----
-        if (Auth::user()->role != 'admin') {
-            Auth::logout();
-            return back()->withErrors([
-                'email' => 'You are not authorized to access the admin panel.',
-            ]);
+        $user = Auth::user();
+
+        // Admin Panel Access Control
+        if (in_array($user->role, ['admin', 'manager'])) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('admin.dashboard', absolute: false));
         }
-        //---  Restrict login to admin only end ----
 
-        $request->session()->regenerate();
+        // Driver panel Access Control - optional
+        if (in_array($user->role, ['driver', 'deliveryman'])) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('driver.dashboard', absolute: false));
+        }
 
-        // return redirect()->intended(route('dashboard', absolute: false));
-        return redirect()->intended(route('admin.dashboard', absolute: false));
+        // Fallback (unknown role)
+        Auth::logout();
+        return back()->withErrors(['email' => 'You are not authorized to access the admin panel.',]);
     }
 
     /**
