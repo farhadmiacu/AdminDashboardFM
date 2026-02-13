@@ -111,11 +111,33 @@ class MiaHelper
     }
 
 
-    // Usage Example:
+    // Usage Example - create:
     // $slug = MiaHelper::generateSlug(Category::class, $request->name);
+
+    // Usage Example - update:
     // if ($category->name !== $request->name) {
     //         $category->slug = MiaHelper::generateSlug(Category::class, $request->name, 'slug', $category->id);
     //     }
 
 
+    //--------  For Text Cleaning
+    public static function cleanText($html)
+    {
+        return trim(
+            preg_replace(
+                '/\s+/u',
+                ' ',
+                str_replace(
+                    "\u{00A0}",
+                    ' ',
+                    html_entity_decode(strip_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8')
+                )
+            )
+        );
+    }
+
+    // Usage Example:
+    // $cleanDescription = MiaHelper::cleanText($item->description);
+    //or,
+    // 'cleanDescription' = MiaHelper::cleanText($item->description);
 }
