@@ -17,3 +17,8 @@ https://github.com/yajra/laravel-datatables
 5. config/cors.php file
 6. MiaHelper.php file
 7. ApiResponse.php trait file for api
+
+8. stripe package
+composer require stripe/stripe-php
+and update .env file and add into config/services.php
+

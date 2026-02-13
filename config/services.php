@@ -34,5 +34,11 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    // for stripe
+    'stripe' => [
+        'secret' => env('STRIPE_SECRET_KEY'),
+        'key'    => env('STRIPE_PUBLIC_KEY'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
 
 ];

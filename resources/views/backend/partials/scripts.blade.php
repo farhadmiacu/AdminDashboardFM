@@ -1,5 +1,7 @@
   <!-- Jquery -->
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- Jquery Repeater-->
+  <script src="https://cdn.jsdelivr.net/npm/jquery.repeater/jquery.repeater.min.js"></script>
 
   <!-- Template js start -->
 
