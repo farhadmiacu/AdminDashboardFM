@@ -19,6 +19,7 @@ class StripeSettingController extends Controller
         $request->validate([
             'stripe_public_key' => 'required|string|max:255',
             'stripe_secret_key' => 'required|string|max:255',
+            'stripe_webhook_secret' => 'nullable|string|max:255',
         ]);
 
         try {
@@ -29,9 +30,11 @@ class StripeSettingController extends Controller
             $envContent = preg_replace([
                 '/STRIPE_PUBLIC_KEY=(.*)\s?/',
                 '/STRIPE_SECRET_KEY=(.*)\s?/',
+                '/STRIPE_WEBHOOK_SECRET=(.*)\s?/',
             ], [
                 'STRIPE_PUBLIC_KEY=' . $request->stripe_public_key . $lineBreak,
                 'STRIPE_SECRET_KEY=' . $request->stripe_secret_key . $lineBreak,
+                'STRIPE_WEBHOOK_SECRET=' . $request->stripe_webhook_secret . $lineBreak,
             ], $envContent);
 
             File::put($envPath, $envContent);

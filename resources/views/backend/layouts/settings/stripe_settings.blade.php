@@ -46,6 +46,15 @@
                             @enderror
                         </div>
 
+                        <div class="form-group mb-3">
+                            <label for="stripe_webhook_secret" class="form-label">Stripe Webhook Secret</label>
+                            <input type="text" name="stripe_webhook_secret" id="stripe_webhook_secret" class="form-control @error('stripe_webhook_secret') is-invalid @enderror"
+                                value="{{ env('STRIPE_WEBHOOK_SECRET') }}" placeholder="Enter Stripe Webhook Secret">
+                            @error('stripe_webhook_secret')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Update Settings</button>
                     </form>
                 </div>
