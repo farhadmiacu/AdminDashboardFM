@@ -31,7 +31,7 @@
                         <div class="row gy-4">
 
                             {{-- Logo --}}
-                            <div class="col-xxl-4 col-md-6">
+                            <div class="col-xxl-6 col-md-6">
                                 <div>
                                     <label for="logo" class="form-label">Logo</label>
                                     <input type="file" name="logo" id="logo" class="form-control dropify" data-allowed-file-extensions="jpg jpeg png svg"
@@ -44,7 +44,7 @@
                             </div>
 
                             {{-- Favicon --}}
-                            <div class="col-xxl-4 col-md-6">
+                            <div class="col-xxl-6 col-md-6">
                                 <div>
                                     <label for="favicon" class="form-label">Favicon</label>
                                     <input type="file" name="favicon" id="favicon" class="form-control dropify" data-allowed-file-extensions="jpg jpeg png svg ico"
@@ -114,18 +114,7 @@
                                 </div>
                             </div>
 
-                            {{-- Company Address --}}
-                            <div class="col-xxl-12 col-md-12">
-                                <div>
-                                    <label for="company_address" class="form-label">Company Address</label>
-                                    <textarea name="company_address" id="company_address" class="form-control" placeholder="Enter company address" rows="3">{{ old('company_address', $setting->company_address ?? '') }}</textarea>
-                                    @error('company_address')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            {{-- Tax Percentage --}}
+                             {{-- Tax Percentage --}}
                             <div class="col-xxl-6 col-md-6">
                                 <div>
                                     <label for="tax_percentage" class="form-label">Tax Percentage (%)</label>
@@ -137,8 +126,19 @@
                                 </div>
                             </div>
 
+                            {{-- Company Address --}}
+                            <div class="col-xxl-12 col-md-12">
+                                <div>
+                                    <label for="company_address" class="form-label">Company Address</label>
+                                    <textarea name="company_address" id="company_address" class="form-control" placeholder="Enter company address" rows="3">{{ old('company_address', $setting->company_address ?? '') }}</textarea>
+                                    @error('company_address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             {{-- Copyright Text --}}
-                            <div class="col-xxl-6 col-md-6">
+                            <div class="col-xxl-12 col-md-12">
                                 <div>
                                     <label for="copyright_text" class="form-label">Copyright Text</label>
                                     <input type="text" name="copyright_text" id="copyright_text" class="form-control" placeholder="Enter copyright text"

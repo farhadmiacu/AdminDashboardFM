@@ -151,7 +151,7 @@
                             </div>
 
                             {{-- Copyright Text --}}
-                            <div class="col-xxl-6 col-md-6">
+                            <div class="col-xxl-12 col-md-12">
                                 <div>
                                     <label for="copyright_text" class="form-label">Copyright Text</label>
                                     <input type="text" name="copyright_text" id="copyright_text" class="form-control" placeholder="Enter copyright text"
