@@ -152,6 +152,28 @@
                      </div>
                  </li> --}}
 
+                 {{-- Package Menu --}}
+                 <li class="nav-item">
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.packages.*') ? '' : 'collapsed' }}" href="#sidebarPackage" data-bs-toggle="collapse" role="button"
+                         aria-expanded="{{ request()->routeIs('admin.packages.*') ? 'true' : 'false' }}" aria-controls="sidebarPackage">
+                         <i class="ri-gift-line"></i> <span>Packages</span>
+                     </a>
+                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.packages.*') ? 'show' : '' }}" id="sidebarPackage">
+                         <ul class="nav nav-sm flex-column">
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.packages.create') }}" class="nav-link {{ request()->routeIs('admin.packages.create') ? 'active' : '' }}">
+                                     Add Package
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.packages.index') }}" class="nav-link {{ request()->routeIs('admin.packages.index') ? 'active' : '' }}">
+                                     All Packages
+                                 </a>
+                             </li>
+                         </ul>
+                     </div>
+                 </li>
+
                  {{-- Settings --}}
                  <li class="menu-title"><span data-key="t-menu">Settings</span></li>
 

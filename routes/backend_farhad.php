@@ -1,17 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\Farhad\StatusController;
-use App\Http\Controllers\Backend\Farhad\ProductController;
 use App\Http\Controllers\Backend\Farhad\CategoryController;
-use App\Http\Controllers\Backend\Setting\ManagerController;
 use App\Http\Controllers\Backend\Farhad\DashboardController;
+use App\Http\Controllers\Backend\Farhad\PackageController;
+use App\Http\Controllers\Backend\Farhad\ProductController;
+use App\Http\Controllers\Backend\Farhad\StatusController;
+use App\Http\Controllers\Backend\Setting\AdminSettingController;
 use App\Http\Controllers\Backend\Setting\MailSettingController;
+use App\Http\Controllers\Backend\Setting\ManagerController;
+use App\Http\Controllers\Backend\Setting\ProfileSettingController;
 use App\Http\Controllers\Backend\Setting\SocialSettingController;
 use App\Http\Controllers\Backend\Setting\StripeSettingController;
-use App\Http\Controllers\Backend\Setting\AdminSettingController;
 use App\Http\Controllers\Backend\Setting\SystemSettingController;
-use App\Http\Controllers\Backend\Setting\ProfileSettingController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:web', 'role:admin,manager'])->prefix('admin')->name('admin.')->group(function () {
 
@@ -69,4 +70,12 @@ Route::middleware(['auth:web', 'role:admin,manager'])->prefix('admin')->name('ad
 
     //Status
     Route::post('/update-status', [StatusController::class, 'update'])->name('status.update');
+
+    // Packages routes
+    Route::get('packages', [PackageController::class, 'index'])->name('packages.index');
+    Route::get('packages/create', [PackageController::class, 'create'])->name('packages.create');
+    Route::post('packages', [PackageController::class, 'store'])->name('packages.store');
+    Route::get('packages/{package}/edit', [PackageController::class, 'edit'])->name('packages.edit');
+    Route::put('packages/{package}', [PackageController::class, 'update'])->name('packages.update');
+    Route::delete('packages/{package}', [PackageController::class, 'destroy'])->name('packages.destroy');
 });
