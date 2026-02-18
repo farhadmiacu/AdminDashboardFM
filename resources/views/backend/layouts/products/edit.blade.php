@@ -220,39 +220,72 @@
         });
     </script>
     <script>
+        /**
+         * Multi-Image Upload & Accumulation Logic
+         * This script allows users to add multiple images sequentially without overwriting previous selections.
+         */
         const previewContainer = document.getElementById('preview_multi_images');
+        const multiInput = document.getElementById('multi_images');
 
-        // Remove DB or new image
+        // This array stores all valid File objects selected by the user
+        let allFiles = [];
+
+        /**
+         * Handle Image Removal
+         * Listens for clicks on the 'X' button of both existing (DB) and newly added previews.
+         */
         previewContainer.addEventListener('click', function(e) {
             if (e.target.classList.contains('remove-img-btn')) {
                 const wrapper = e.target.closest('div');
-                // If it's a DB image, add hidden input to track removal
+
+                // Case 1: If it's an existing image from the database
                 if (wrapper.classList.contains('db-image')) {
+                    // Create a hidden input to tell the backend to delete this specific image ID
                     const removedInput = document.createElement('input');
                     removedInput.type = 'hidden';
                     removedInput.name = 'removed_images[]';
                     removedInput.value = e.target.getAttribute('data-id');
                     previewContainer.appendChild(removedInput);
                 }
+                // Case 2: If it's a newly added image (not yet saved)
+                else if (wrapper.classList.contains('new-preview')) {
+                    // Mark the file as null in the accumulation array using its stored index
+                    const index = parseInt(wrapper.dataset.index);
+                    if (!isNaN(index)) {
+                        allFiles[index] = null;
+                    }
+                }
+
+                // Visually remove the preview from the UI
                 wrapper.remove();
             }
         });
 
-        // Add newly selected images
-        document.getElementById('multi_images').addEventListener('change', function(event) {
+        /**
+         * Handle File Selection Change
+         * Fired whenever the user selects one or more files from the file browser.
+         */
+        multiInput.addEventListener('change', function(event) {
             Array.from(event.target.files).forEach(file => {
+                // Only process image files
                 if (file.type.startsWith('image/')) {
+                    // Accumulate the file into our global array
+                    allFiles.push(file);
+                    const currentIndex = allFiles.length - 1;
+
+                    // Generate a preview for the UI
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         const wrapper = document.createElement('div');
                         wrapper.classList.add('position-relative', 'd-inline-block', 'new-preview');
+                        wrapper.dataset.index = currentIndex; // Link UI element to its index in allFiles
 
                         const img = document.createElement('img');
                         img.src = e.target.result;
                         img.height = 150;
                         img.width = 150;
                         img.classList.add('rounded', 'border', 'p-1', 'shadow-sm');
-                        img.style.border = "2px dashed #28a745";
+                        img.style.border = "2px dashed #28a745"; // Visual indicator for unsaved images
                         img.style.padding = "4px";
 
                         const btn = document.createElement('span');
@@ -268,6 +301,43 @@
                         previewContainer.appendChild(wrapper);
                     }
                     reader.readAsDataURL(file);
+                }
+            });
+
+            // CRITICAL: Clear the input value.
+            // This allows selecting the same file again if removed, and prevents the browser
+            // from sending the "last selection" twice alongside our manually managed inputs.
+            multiInput.value = '';
+        });
+
+        /**
+         * Finalize Submission
+         * Injects all accumulated files into the form right before it's sent to the server.
+         */
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            const form = this;
+
+            // Remove any original multi_images inputs to ensure we only send our managed 'allFiles'
+            document.querySelectorAll('input[name="multi_images[]"]').forEach(input => {
+                if (!input.classList.contains('accumulated-file-input')) {
+                    input.remove();
+                }
+            });
+
+            // Convert our allFiles array into actual file inputs that the form can submit
+            allFiles.forEach(file => {
+                if (file) {
+                    // DataTransfer API allows us to programmatically set the 'files' property of an input[type="file"]
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+
+                    const newInput = document.createElement('input');
+                    newInput.type = 'file';
+                    newInput.name = 'multi_images[]';
+                    newInput.files = dataTransfer.files;
+                    newInput.classList.add('accumulated-file-input');
+                    newInput.style.display = 'none';
+                    form.appendChild(newInput);
                 }
             });
         });

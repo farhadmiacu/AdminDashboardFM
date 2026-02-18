@@ -207,17 +207,28 @@
 
     {{-- multi image preview script --}}
     <script>
+        /**
+         * Multi-Image Upload & Accumulation Logic
+         * This script allows users to add multiple images sequentially without overwriting previous selections.
+         */
         const previewContainer = document.getElementById('preview_multi_images');
         const fileInput = document.getElementById('multi_images');
 
-        let allFiles = []; // store all selected files
+        // This array stores all valid File objects selected by the user
+        let allFiles = [];
 
-        // Add new file previews
+        /**
+         * Handle Image Selection Change
+         * Fired whenever the user selects one or more files from the file browser.
+         */
         fileInput.addEventListener('change', function(event) {
             Array.from(event.target.files).forEach(file => {
+                // Only process image files
                 if (file.type.startsWith('image/')) {
-                    allFiles.push(file); // add to array
+                    // Accumulate the file into our global array
+                    allFiles.push(file);
 
+                    // Generate a preview for the UI
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         const wrapper = document.createElement('div');
@@ -228,7 +239,7 @@
                         img.height = 150;
                         img.width = 150;
                         img.classList.add('rounded', 'border', 'p-1', 'shadow-sm');
-                        img.style.border = "2px dashed #28a745";
+                        img.style.border = "2px dashed #28a745"; // Visual indicator for unsaved images
                         img.style.padding = "4px";
 
                         const btn = document.createElement('span');
@@ -239,7 +250,7 @@
                         btn.style.height = "24px";
                         btn.style.cursor = "pointer";
 
-                        // store the file index
+                        // store the file index to facilitate easy removal from allFiles array
                         wrapper.dataset.index = allFiles.length - 1;
 
                         wrapper.appendChild(img);
@@ -250,30 +261,45 @@
                 }
             });
 
-            // Reset input so same file can be added again
+            // CRITICAL: Clear the input value.
+            // This allows selecting the same file again if removed, and prevents the browser
+            // from sending the "last selection" twice alongside our manually managed inputs.
             fileInput.value = '';
         });
 
-        // Remove preview when clicking ❌
+        /**
+         * Handle Image Removal
+         * Listens for clicks on the 'X' button of previews.
+         */
         previewContainer.addEventListener('click', function(e) {
             if (e.target.classList.contains('remove-img-btn')) {
                 const wrapper = e.target.closest('div');
                 const index = parseInt(wrapper.dataset.index);
-                allFiles[index] = null; // mark removed
+                // Mark the file as null in the accumulation array
+                allFiles[index] = null;
+                // Visually remove from the UI
                 wrapper.remove();
             }
         });
 
-        // Before form submit, append all files to a hidden input file array
+        /**
+         * Finalize Submission
+         * Injects all accumulated files into the form right before it's sent to the server.
+         */
         document.getElementById('productForm').addEventListener('submit', function(e) {
             const form = this;
 
-            // Remove old hidden inputs if any
-            document.querySelectorAll('input[name="multi_images[]"]').forEach(i => i.remove());
+            // Remove any original multi_images inputs to ensure we only send our managed 'allFiles'
+            document.querySelectorAll('input[name="multi_images[]"]').forEach(input => {
+                if (!input.classList.contains('accumulated-file-input')) {
+                    input.remove();
+                }
+            });
 
-            // Create hidden file inputs for allFiles
+            // Convert our allFiles array into actual file inputs that the form can submit
             allFiles.forEach(file => {
                 if (file) {
+                    // DataTransfer API allows us to programmatically set the 'files' property of an input[type="file"]
                     const dataTransfer = new DataTransfer();
                     dataTransfer.items.add(file);
 
@@ -281,6 +307,7 @@
                     newInput.type = 'file';
                     newInput.name = 'multi_images[]';
                     newInput.files = dataTransfer.files;
+                    newInput.classList.add('accumulated-file-input');
                     newInput.style.display = 'none';
 
                     form.appendChild(newInput);
