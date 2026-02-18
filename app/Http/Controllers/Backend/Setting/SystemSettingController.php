@@ -3,23 +3,22 @@
 namespace App\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use App\Models\AdminSetting;
+use App\Models\SystemSetting;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
-class AdminSettingController extends Controller
+class SystemSettingController extends Controller
 {
     public function edit()
     {
-        $setting = AdminSetting::first();
-        return view('backend.layouts.settings.admin_settings', compact('setting'));
+        $setting = SystemSetting::first();
+        return view('backend.layouts.settings.system_settings', compact('setting'));
     }
 
     public function update(Request $request)
     {
         $request->validate([
-            'system_title' => 'nullable|string|max:255',
             'company_name' => 'nullable|string|max:255',
             'tag_line' => 'nullable|string|max:255',
             'phone_number' => 'nullable|string|max:20',
@@ -27,18 +26,18 @@ class AdminSettingController extends Controller
             'email' => 'nullable|email|max:255',
             'company_address' => 'nullable|string',
             'copyright_text' => 'nullable|string|max:255',
+            'tax_percentage' => 'nullable|numeric|min:0|max:100',
             'logo' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:5120',
-            'mini_logo' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:5120',
             'favicon' => 'nullable|image|mimes:png,jpg,jpeg,svg,ico|max:5120',
         ]);
 
-        $setting = AdminSetting::first();
+        $setting = SystemSetting::first();
         if (!$setting) {
-            $setting = new AdminSetting();
+            $setting = new SystemSetting();
             $setting->id = 1; // manually assign
         }
 
-        $directory = 'uploads/admin-settings-images/';
+        $directory = 'uploads/system-settings-images/';
 
         // Ensure directory exists
         if (!File::exists(public_path($directory))) {
@@ -49,10 +48,6 @@ class AdminSettingController extends Controller
         if ($request->input('remove_logo') && $setting->logo && file_exists(public_path($setting->logo))) {
             unlink(public_path($setting->logo));
             $setting->logo = null;
-        }
-        if ($request->input('remove_mini_logo') && $setting->mini_logo && file_exists(public_path($setting->mini_logo))) {
-            unlink(public_path($setting->mini_logo));
-            $setting->mini_logo = null;
         }
         if ($request->input('remove_favicon') && $setting->favicon && file_exists(public_path($setting->favicon))) {
             unlink(public_path($setting->favicon));
@@ -71,17 +66,6 @@ class AdminSettingController extends Controller
             $setting->logo = $directory . $logoName;
         }
 
-        // Mini Logo
-        if ($request->file('mini_logo')) {
-            if ($setting->mini_logo && file_exists(public_path($setting->mini_logo))) {
-                unlink(public_path($setting->mini_logo));
-            }
-            $miniLogo = $request->file('mini_logo');
-            $miniLogoName = 'mini_logo_' . time() . '_' . uniqid() . '.' . $miniLogo->getClientOriginalExtension();
-            $resizedMiniLogo = Image::make($miniLogo)->resize(80, 80);
-            $resizedMiniLogo->save(public_path($directory . $miniLogoName));
-            $setting->mini_logo = $directory . $miniLogoName;
-        }
 
         // Favicon
         if ($request->file('favicon')) {
@@ -96,7 +80,6 @@ class AdminSettingController extends Controller
         }
 
         // Other fields
-        $setting->system_title = $request->system_title;
         $setting->company_name = $request->company_name;
         $setting->tag_line = $request->tag_line;
         $setting->phone_number = $request->phone_number;
@@ -104,6 +87,7 @@ class AdminSettingController extends Controller
         $setting->email = $request->email;
         $setting->company_address = $request->company_address;
         $setting->copyright_text = $request->copyright_text;
+        $setting->tax_percentage = $request->tax_percentage;
 
         $setting->save();
 

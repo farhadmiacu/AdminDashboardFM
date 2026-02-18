@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                <h4 class="mb-sm-0">Admin Settings</h4>
+                <h4 class="mb-sm-0">System Settings</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
@@ -22,10 +22,10 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Update Admin Settings</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Update System Settings</h4>
                 </div><!-- end card header -->
 
-                <form action="{{ route('admin.admin-settings.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.system-settings.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row gy-4">
@@ -43,19 +43,6 @@
                                 </div>
                             </div>
 
-                            {{-- Mini Logo --}}
-                            <div class="col-xxl-4 col-md-6">
-                                <div>
-                                    <label for="mini_logo" class="form-label">Mini Logo</label>
-                                    <input type="file" name="mini_logo" id="mini_logo" class="form-control dropify" data-allowed-file-extensions="jpg jpeg png svg"
-                                        data-default-file="{{ $setting && $setting->mini_logo ? asset($setting->mini_logo) : '' }}">
-                                    <input type="hidden" name="remove_mini_logo" id="remove_mini_logo_hidden" value="0">
-                                    @error('mini_logo')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
                             {{-- Favicon --}}
                             <div class="col-xxl-4 col-md-6">
                                 <div>
@@ -64,18 +51,6 @@
                                         data-default-file="{{ $setting && $setting->favicon ? asset($setting->favicon) : '' }}">
                                     <input type="hidden" name="remove_favicon" id="remove_favicon_hidden" value="0">
                                     @error('favicon')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            {{-- System Title --}}
-                            <div class="col-xxl-6 col-md-6">
-                                <div>
-                                    <label for="system_title" class="form-label">System Title</label>
-                                    <input type="text" name="system_title" id="system_title" class="form-control" placeholder="Enter system title"
-                                        value="{{ old('system_title', $setting->system_title ?? '') }}">
-                                    @error('system_title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -145,6 +120,18 @@
                                     <label for="company_address" class="form-label">Company Address</label>
                                     <textarea name="company_address" id="company_address" class="form-control" placeholder="Enter company address" rows="3">{{ old('company_address', $setting->company_address ?? '') }}</textarea>
                                     @error('company_address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- Tax Percentage --}}
+                            <div class="col-xxl-6 col-md-6">
+                                <div>
+                                    <label for="tax_percentage" class="form-label">Tax Percentage (%)</label>
+                                    <input type="number" name="tax_percentage" id="tax_percentage" class="form-control" placeholder="e.g., 10.50" step="0.01" min="0" max="100"
+                                        value="{{ old('tax_percentage', $setting->tax_percentage ?? '') }}">
+                                    @error('tax_percentage')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
