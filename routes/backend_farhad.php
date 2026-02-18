@@ -9,7 +9,7 @@ use App\Http\Controllers\Backend\Farhad\DashboardController;
 use App\Http\Controllers\Backend\Setting\MailSettingController;
 use App\Http\Controllers\Backend\Setting\SocialSettingController;
 use App\Http\Controllers\Backend\Setting\StripeSettingController;
-use App\Http\Controllers\Backend\Setting\SystemSettingController;
+use App\Http\Controllers\Backend\Setting\AdminSettingController;
 use App\Http\Controllers\Backend\Setting\ProfileSettingController;
 
 Route::middleware(['auth:web', 'role:admin,manager'])->prefix('admin')->name('admin.')->group(function () {
@@ -59,8 +59,8 @@ Route::middleware(['auth:web', 'role:admin,manager'])->prefix('admin')->name('ad
     Route::post('settings/stripe', [StripeSettingController::class, 'update'])->name('stripe-settings.update');
 
     // Systems routes
-    Route::get('settings/system', [SystemSettingController::class, 'edit'])->name('system-settings.edit');
-    Route::post('settings/system', [SystemSettingController::class, 'update'])->name('system-settings.update');
+    Route::get('settings/admin', [AdminSettingController::class, 'edit'])->name('admin-settings.edit');
+    Route::post('settings/admin', [AdminSettingController::class, 'update'])->name('admin-settings.update');
 
     //Status
     Route::post('/update-status', [StatusController::class, 'update'])->name('status.update');

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                <h4 class="mb-sm-0">System Settings</h4>
+                <h4 class="mb-sm-0">Admin Settings</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
@@ -22,10 +22,10 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Update System Settings</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Update Admin Settings</h4>
                 </div><!-- end card header -->
 
-                <form action="{{ route('admin.system-settings.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.admin-settings.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row gy-4">

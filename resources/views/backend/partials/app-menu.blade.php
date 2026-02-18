@@ -5,26 +5,26 @@
          <!-- Dark Logo-->
          <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
              <span class="logo-sm">
-                 @if (!empty($systemSetting->mini_logo))
-                     <img src="{{ asset($systemSetting->mini_logo) }}" alt="Logo" height="22">
+                 @if (!empty($adminSetting->mini_logo))
+                     <img src="{{ asset($adminSetting->mini_logo) }}" alt="Logo" height="22">
                  @endif
              </span>
              <span class="logo-lg">
-                 @if (!empty($systemSetting->logo))
-                     <img src="{{ asset($systemSetting->logo) }}" alt="Logo" height="35">
+                 @if (!empty($adminSetting->logo))
+                     <img src="{{ asset($adminSetting->logo) }}" alt="Logo" height="35">
                  @endif
              </span>
          </a>
          <!-- Light Logo-->
          <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
              <span class="logo-sm">
-                 @if (!empty($systemSetting->mini_logo))
-                     <img src="{{ asset($systemSetting->mini_logo) }}" alt="Logo" height="22">
+                 @if (!empty($adminSetting->mini_logo))
+                     <img src="{{ asset($adminSetting->mini_logo) }}" alt="Logo" height="22">
                  @endif
              </span>
              <span class="logo-lg">
-                 @if (!empty($systemSetting->logo))
-                     <img src="{{ asset($systemSetting->logo) }}" alt="Logo" height="35">
+                 @if (!empty($adminSetting->logo))
+                     <img src="{{ asset($adminSetting->logo) }}" alt="Logo" height="35">
                  @endif
              </span>
          </a>
@@ -157,14 +157,14 @@
 
                  {{-- Settings Section --}}
                  <li class="nav-item">
-                     <a class="nav-link menu-link {{ request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.managers.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') ? '' : 'collapsed' }}"
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.managers.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.admin-settings.*') || request()->routeIs('admin.mail-settings.*') ? '' : 'collapsed' }}"
                          href="#sidebarSettings" data-bs-toggle="collapse" role="button"
-                         aria-expanded="{{ request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.managers.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') ? 'true' : 'false' }}"
+                         aria-expanded="{{ request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.managers.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.admin-settings.*') || request()->routeIs('admin.mail-settings.*') ? 'true' : 'false' }}"
                          aria-controls="sidebarSettings">
                          <i class="ri-settings-3-line"></i> <span>Settings</span>
                      </a>
 
-                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.managers.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.system-settings.*') || request()->routeIs('admin.mail-settings.*') ? 'show' : '' }}"
+                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.profile-settings.*') || request()->routeIs('admin.managers.*') || request()->routeIs('admin.social-settings.*') || request()->routeIs('admin.stripe-settings.*') || request()->routeIs('admin.admin-settings.*') || request()->routeIs('admin.mail-settings.*') ? 'show' : '' }}"
                          id="sidebarSettings">
 
                          <ul class="nav nav-sm flex-column">
@@ -198,10 +198,10 @@
                                  </a>
                              </li>
 
-                             {{-- System Settings --}}
+                             {{-- Admin Settings --}}
                              <li class="nav-item">
-                                 <a href="{{ route('admin.system-settings.edit') }}" class="nav-link {{ request()->routeIs('admin.system-settings.*') ? 'active' : '' }}">
-                                     <i class="ri-settings-3-line"></i> <span>System Settings</span>
+                                 <a href="{{ route('admin.admin-settings.edit') }}" class="nav-link {{ request()->routeIs('admin.admin-settings.*') ? 'active' : '' }}">
+                                     <i class="ri-settings-3-line"></i> <span>Admin Settings</span>
                                  </a>
                              </li>
 

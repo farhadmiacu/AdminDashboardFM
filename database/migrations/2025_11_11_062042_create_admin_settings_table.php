@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('system_settings', function (Blueprint $table) {
+        Schema::create('admin_settings', function (Blueprint $table) {
             $table->id();
             $table->string('logo')->nullable();
             $table->string('mini_logo')->nullable();
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_settings');
+        Schema::dropIfExists('admin_settings');
     }
 };

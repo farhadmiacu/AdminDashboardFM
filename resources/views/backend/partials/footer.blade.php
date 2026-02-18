@@ -2,11 +2,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                {{ $systemSetting->copyright_text }}
+                {{ $adminSetting->copyright_text }}
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-end d-none d-sm-block">
-                    {{ $systemSetting->company_name }}
+                    {{ $adminSetting->company_name }}
                 </div>
             </div>
         </div>

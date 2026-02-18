@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\SystemSetting;
+use App\Models\AdminSetting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Get Data From Database
         View::composer('backend.*', function ($view) {
-            $systemSetting = SystemSetting::first() ?? new SystemSetting([
+            $adminSetting = AdminSetting::first() ?? new AdminSetting([
                 'logo' => 'default-logo.png',
                 'mini_logo' => 'default-mini-logo.png',
                 'favicon' => 'default-favicon.png',
@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
                 'copyright_text' => '2025 © Company. All rights reserved.',
             ]);
 
-            $view->with('systemSetting', $systemSetting);
+            $view->with('adminSetting', $adminSetting);
         });
     }
 }

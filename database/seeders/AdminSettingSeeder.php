@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\SystemSetting;
+use App\Models\AdminSetting;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class SystemSettingSeeder extends Seeder
+class AdminSettingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        SystemSetting::firstOrCreate(
+        AdminSetting::firstOrCreate(
             ['id' => 1], // ensures only one default record
             [
                 'logo'            => null,

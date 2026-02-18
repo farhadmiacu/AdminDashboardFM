@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use App\Models\SystemSetting;
+use App\Models\AdminSetting;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
-class SystemSettingController extends Controller
+class AdminSettingController extends Controller
 {
     public function edit()
     {
-        $setting = SystemSetting::first();
-        return view('backend.layouts.settings.system_settings', compact('setting'));
+        $setting = AdminSetting::first();
+        return view('backend.layouts.settings.admin_settings', compact('setting'));
     }
 
     public function update(Request $request)
@@ -33,13 +33,13 @@ class SystemSettingController extends Controller
             'favicon' => 'nullable|image|mimes:png,jpg,jpeg,svg,ico|max:5120',
         ]);
 
-        $setting = SystemSetting::first();
+        $setting = AdminSetting::first();
         if (!$setting) {
-            $setting = new SystemSetting();
+            $setting = new AdminSetting();
             $setting->id = 1; // manually assign
         }
 
-        $directory = 'uploads/system-settings-images/';
+        $directory = 'uploads/admin-settings-images/';
 
         // Ensure directory exists
         if (!File::exists(public_path($directory))) {

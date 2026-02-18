@@ -47,8 +47,8 @@
         <div class="otp">{{ $otp }}</div>
         <p style="text-align:center;">If you didn’t request this, please ignore this email.</p>
         <div class="footer">
-            @if (isset($system_setting))
-                &copy; {{ date('Y') }} {{ $system_setting->title }}. All rights reserved.
+            @if (isset($adminSetting))
+                &copy; {{ date('Y') }} {{ $adminSetting->system_title }}. All rights reserved.
             @endif
         </div>
     </div>
