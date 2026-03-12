@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\Farhad\BannerController;
 use App\Http\Controllers\Backend\Farhad\CategoryController;
+use App\Http\Controllers\Backend\Farhad\ContactMessageController;
 use App\Http\Controllers\Backend\Farhad\DashboardController;
 use App\Http\Controllers\Backend\Farhad\PackageController;
 use App\Http\Controllers\Backend\Farhad\ProductController;
@@ -65,6 +66,13 @@ Route::middleware(['auth:web', 'role:admin,manager'])->prefix('admin')->name('ad
     Route::get('packages/{package}/edit', [PackageController::class, 'edit'])->name('packages.edit');
     Route::put('packages/{package}', [PackageController::class, 'update'])->name('packages.update');
     Route::delete('packages/{package}', [PackageController::class, 'destroy'])->name('packages.destroy');
+
+    // Contact Messages routes
+    Route::get('contact-messages', [ContactMessageController::class, 'index'])->name('contact-messages.index');
+    Route::get('contact-messages/{contact_message}', [ContactMessageController::class, 'show'])->name('contact-messages.show');
+    Route::get('contact-messages/{contact_message}/edit', [ContactMessageController::class, 'edit'])->name('contact-messages.edit');
+    Route::patch('contact-messages/{contact_message}/status', [ContactMessageController::class, 'updateStatus'])->name('contact-messages.update-status');
+    Route::delete('contact-messages/{contact_message}', [ContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
 
     // Subscribers routes
     Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');

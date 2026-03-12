@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ContactMessageController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\Api\SubscriberController;
@@ -24,6 +25,9 @@ Route::post('/password/reset', [AuthController::class, 'resetPassword']);
 // Subscribe and Unsubscribe routes
 Route::post('/subscribe', [SubscriberController::class, 'subscribe']);
 Route::post('/unsubscribe', [SubscriberController::class, 'unsubscribe']);
+
+// Contact Us Message route
+Route::post('/pages/contact-us-message', [ContactMessageController::class, 'store']);
 
 //Profile Settings both Customer and Driver/Deliveryman
 Route::middleware('auth:api')->group(function () {
