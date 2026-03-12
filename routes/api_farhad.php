@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\StripeController;
+use App\Http\Controllers\Api\SubscriberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\StripeController;
-use App\Http\Controllers\Api\ProfileController;
 
 Route::middleware(['setLang'])->group(function () {
     // Public routes or lang specific
@@ -19,6 +20,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/password/send-otp', [AuthController::class, 'sendOtp']);
 Route::post('/password/verify-otp', [AuthController::class, 'verifyOtp']);
 Route::post('/password/reset', [AuthController::class, 'resetPassword']);
+
+// Subscribe and Unsubscribe routes
+Route::post('/subscribe', [SubscriberController::class, 'subscribe']);
+Route::post('/unsubscribe', [SubscriberController::class, 'unsubscribe']);
 
 //Profile Settings both Customer and Driver/Deliveryman
 Route::middleware('auth:api')->group(function () {

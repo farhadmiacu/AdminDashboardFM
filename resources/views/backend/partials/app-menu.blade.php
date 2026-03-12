@@ -197,6 +197,29 @@
                      </div>
                  </li>
 
+                 {{-- Communications Menu --}}
+                 <li class="nav-item">
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.subscribers.*') || request()->routeIs('admin.contact-messages.*') ? '' : 'collapsed' }}" href="#sidebarCommunications"
+                         data-bs-toggle="collapse" role="button"
+                         aria-expanded="{{ request()->routeIs('admin.subscribers.*') || request()->routeIs('admin.contact-messages.*') ? 'true' : 'false' }}" aria-controls="sidebarCommunications">
+                         <i class="ri-pages-line"></i> <span>Communications</span>
+                     </a>
+                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.subscribers.*') || request()->routeIs('admin.contact-messages.*') ? 'show' : '' }}" id="sidebarCommunications">
+                         <ul class="nav nav-sm flex-column">
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.subscribers.index') }}" class="nav-link {{ request()->routeIs('admin.subscribers.*') ? 'active' : '' }}">
+                                     Subscribers
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.contact-messages.index') }}" class="nav-link {{ request()->routeIs('admin.contact-messages.*') ? 'active' : '' }}">
+                                     Contact Messages
+                                 </a>
+                             </li>
+                         </ul>
+                     </div>
+                 </li>
+
                  {{-- Settings --}}
                  <li class="menu-title"><span data-key="t-menu">Settings</span></li>
 
