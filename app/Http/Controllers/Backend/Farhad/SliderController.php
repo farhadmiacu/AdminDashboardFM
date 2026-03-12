@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Http\Controllers\Backend\Farhad;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class SliderController extends Controller
+{
+    //
+}

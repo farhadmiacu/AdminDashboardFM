@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Backend\Farhad\BannerController;
 use App\Http\Controllers\Backend\Farhad\CategoryController;
 use App\Http\Controllers\Backend\Farhad\DashboardController;
 use App\Http\Controllers\Backend\Farhad\PackageController;
 use App\Http\Controllers\Backend\Farhad\ProductController;
+use App\Http\Controllers\Backend\Farhad\SliderController;
 use App\Http\Controllers\Backend\Farhad\StatusController;
 use App\Http\Controllers\Backend\Setting\AdminSettingController;
 use App\Http\Controllers\Backend\Setting\MailSettingController;
@@ -18,6 +20,24 @@ Route::middleware(['auth:web', 'role:admin,manager'])->prefix('admin')->name('ad
 
     // Dashboard route
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Banners routes
+    Route::get('banners', [BannerController::class, 'index'])->name('banners.index');
+    Route::get('banners/create', [BannerController::class, 'create'])->name('banners.create');
+    Route::post('banners', [BannerController::class, 'store'])->name('banners.store');
+    Route::get('banners/{banner}', [BannerController::class, 'show'])->name('banners.show');
+    Route::get('banners/{banner}/edit', [BannerController::class, 'edit'])->name('banners.edit');
+    Route::put('banners/{banner}', [BannerController::class, 'update'])->name('banners.update');
+    Route::delete('banners/{banner}', [BannerController::class, 'destroy'])->name('banners.destroy');
+
+        // Sliders routes
+    Route::get('sliders', [SliderController::class, 'index'])->name('sliders.index');
+    Route::get('sliders/create', [SliderController::class, 'create'])->name('sliders.create');
+    Route::post('sliders', [SliderController::class, 'store'])->name('sliders.store');
+    Route::get('sliders/{slider}', [SliderController::class, 'show'])->name('sliders.show');
+    Route::get('sliders/{slider}/edit', [SliderController::class, 'edit'])->name('sliders.edit');
+    Route::put('sliders/{slider}', [SliderController::class, 'update'])->name('sliders.update');
+    Route::delete('sliders/{slider}', [SliderController::class, 'destroy'])->name('sliders.destroy');
 
     // Categories routes
     Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');

@@ -78,6 +78,29 @@
                      </a>
                  </li>
 
+                 {{-- Content Management Menu --}}
+                 <li class="nav-item">
+                     <a class="nav-link menu-link {{ request()->routeIs('admin.banners.*') || request()->routeIs('admin.sliders.*') ? '' : 'collapsed' }}" href="#sidebarContentManagement"
+                         data-bs-toggle="collapse" role="button" aria-expanded="{{ request()->routeIs('admin.banners.*') || request()->routeIs('admin.sliders.*') ? 'true' : 'false' }}"
+                         aria-controls="sidebarContentManagement">
+                         <i class="ri-pages-line"></i> <span>Content Management</span>
+                     </a>
+                     <div class="collapse menu-dropdown {{ request()->routeIs('admin.banners.*') || request()->routeIs('admin.sliders.*') ? 'show' : '' }}" id="sidebarContentManagement">
+                         <ul class="nav nav-sm flex-column">
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.banners.index') }}" class="nav-link {{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
+                                     Banners
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('admin.sliders.index') }}" class="nav-link {{ request()->routeIs('admin.sliders.*') ? 'active' : '' }}">
+                                     Sliders
+                                 </a>
+                             </li>
+                         </ul>
+                     </div>
+                 </li>
+
                  {{-- Category Menu --}}
                  <li class="nav-item">
                      <a class="nav-link menu-link {{ request()->routeIs('admin.categories.*') ? '' : 'collapsed' }}" href="#sidebarCategory" data-bs-toggle="collapse" role="button"
