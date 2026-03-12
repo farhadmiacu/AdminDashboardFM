@@ -56,7 +56,7 @@
                                 </div>
                             </div>
 
-                            {{-- Title EN --}}
+                            {{-- Title --}}
                             <div class="col-xxl-12 col-md-12">
                                 <div>
                                     <label for="banner_title" class="form-label">Banner Title</label>
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
 
-                            {{-- Description EN --}}
+                            {{-- Description --}}
                             <div class="col-xxl-12 col-md-12">
                                 <label for="banner_description" class="form-label">Banner Description</label>
                                 <textarea name="banner_description" id="banner_description" class="form-control" rows="3">{{ old('banner_description') }}</textarea>
