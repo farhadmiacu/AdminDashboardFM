@@ -31,13 +31,16 @@ class AuthenticatedSessionController extends Controller
         // Admin Panel Access Control
         if (in_array($user->role, ['admin', 'manager'])) {
             $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard', absolute: false));
+            // return redirect()->intended(route('admin.dashboard', absolute: false));
+            return redirect()->route('admin.dashboard');
+
         }
 
         // Driver panel Access Control - optional
         if (in_array($user->role, ['driver', 'deliveryman'])) {
             $request->session()->regenerate();
-            return redirect()->intended(route('driver.dashboard', absolute: false));
+            // return redirect()->intended(route('driver.dashboard', absolute: false));
+            return redirect()->route('driver.dashboard');
         }
 
         // Fallback (unknown role)
